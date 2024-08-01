@@ -96,7 +96,7 @@ def send_message():
     })
     # print(type(payload), payload)
     headers = {'Content-Type': 'application/json'}
-    url = "http://localhost:5000/api-dev/qa/get_answer"
+    url = "http://zklx.xtu.vip.cpolar.top/api-dev/qa/get_answer"
     response = requests.post(url, data=payload, headers=headers)
     # print(response, type(response))
     return response.text
