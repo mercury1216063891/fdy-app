@@ -78,7 +78,7 @@ if "voice_flag" not in st.session_state:
     st.session_state["voice_flag"] = ""
 
 if "messages" not in st.session_state:
-    st.session_state["messages"] = [{"role": "assistant", "message": "你好，我是湘潭大学课程知识答疑小助手“智课灵犀”。"}]
+    st.session_state["messages"] = [{"role": "assistant", "message": "你好，我是湘潭大学学生日常事务管家“辅导猿”。"}]
 
 for msg in st.session_state.messages:
     st.chat_message(msg["role"]).write(msg["message"])
