@@ -12,7 +12,7 @@ with open(icon_path, "rb") as img_file:
     ICON_base64 = base64.b64encode(img_file.read()).decode()
 
 st.set_page_config(
-    page_title="智课灵犀-基于知识校园生活问答",
+    page_title="辅导猿-学生日常事务管家",
     layout="centered",
     page_icon=ICON,
 )
@@ -20,7 +20,7 @@ with st.sidebar:
     icon_text = f"""
         <div class="icon-text-container" style="text-align: center;">
             <img src='data:image/png;base64,{ICON_base64}' alt='icon' style='width: 70px; height: 70px; margin: 0 auto; display: block;'>
-            <span style='font-size: 24px;'>课程助手--智课灵犀</span>
+            <span style='font-size: 24px;'>辅导猿-学生日常事务管家</span>
         </div>
         """
     st.markdown(
@@ -57,7 +57,7 @@ with st.sidebar.expander("文本生成"):
     st.session_state["temperature"] = parameter_3
     st.session_state["repetition_penalty"] = parameter_4
 
-st.title("📚 智课灵犀")
+st.title("📚 辅导猿")
 st.caption("🌈 基于校园生活知识库来进行问答")
 
 
