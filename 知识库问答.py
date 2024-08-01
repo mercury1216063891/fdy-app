@@ -119,7 +119,7 @@ elif option2 == "语音":
             "**输入：**",
             key="user_input_area",
             value=st.session_state.user_voice_value,
-            help="在此输入文本或通过语音输入。"
+            help="在此输入文本或通过语音输入，语音输出暂不可用。"
         )
         submitted = st.form_submit_button("确认提交")
 
