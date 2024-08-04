@@ -4,6 +4,7 @@ import base64
 import requests
 import json
 from voice_toolkit import voice_toolkit
+import traceback
 
 icon_path = "images/院徽.ico"
 
