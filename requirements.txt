@@ -2,4 +2,3 @@ streamlit
 openai
 xlsxwriter
 pandas
-io
