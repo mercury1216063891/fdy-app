@@ -47,7 +47,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.title("💯 智课灵犀")
+st.title("💯 辅导猿")
 st.caption("🌈 成绩统计小工具（声明：本程序对转专业同学以及留级同学的存在考虑不周的情况！）")
 print('声明：本程序对转专业同学以及留级同学的存在考虑不周的情况！\n')
 
