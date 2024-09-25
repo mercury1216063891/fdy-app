@@ -14,7 +14,7 @@ function init() {
     sendMessageToStreamlitClient("streamlit:componentReady", {apiVersion: 1});
 
     // 设置默认语言和声音
-    let defaultLanguage = 'en-US'; // 指定默认语言代码
+    let defaultLanguage = 'zh-CN'; // 指定默认语言代码
     let defaultVoiceName = 'Google US English'; // 指定默认声音名称
     let selectedVoice = window.speechSynthesis.getVoices().find(voice => voice.name === defaultVoiceName);
 
