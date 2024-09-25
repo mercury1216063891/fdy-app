@@ -30,7 +30,7 @@ with st.sidebar:
 
 
 st.sidebar.title('输入')
-option2 = st.sidebar.selectbox('方式', ['键盘', '语音'])
+option2 = st.sidebar.selectbox('方式', ['语音', '键盘'])
 
 # 添加滑动条
 if "n_results" not in st.session_state:
