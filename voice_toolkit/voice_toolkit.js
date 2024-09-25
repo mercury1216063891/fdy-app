@@ -6,8 +6,24 @@ function sendMessageToStreamlitClient(type, data) {
     window.parent.postMessage(outData, "*");
 }
 
+#function init() {
+#    sendMessageToStreamlitClient("streamlit:componentReady", {apiVersion: 1});
+#}
+
 function init() {
     sendMessageToStreamlitClient("streamlit:componentReady", {apiVersion: 1});
+
+    // 设置默认语言和声音
+    let defaultLanguage = 'en-US'; // 指定默认语言代码
+    let defaultVoiceName = 'Google US English'; // 指定默认声音名称
+    let selectedVoice = window.speechSynthesis.getVoices().find(voice => voice.name === defaultVoiceName);
+
+    if (selectedVoice) {
+        window.parent.selectedVoiceName = selectedVoice.name;
+    } else {
+        // 如果没有找到指定的声音，可以选择第一个匹配语言的声音作为默认
+        window.parent.selectedVoiceName = window.speechSynthesis.getVoices().find(voice => voice.lang === defaultLanguage).name;
+    }
 }
 
 function setFrameHeight(height) {
