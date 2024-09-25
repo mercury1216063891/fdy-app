@@ -326,10 +326,20 @@ function SayOutLoud(text) {
 
 
 async function SayOut() {
-    console.log("296");
-    let voices = window.speechSynthesis.getVoices();
-    let zhCNVoices = voices.filter(voice => voice.lang === "zh-CN");
-    console.log("可用的 zh-CN 语音:", zhCNVoices);
+    console.log("329");
+    
+    window.speechSynthesis.onvoiceschanged = () => {
+        let voices = window.speechSynthesis.getVoices();
+        let zhCNVoices = voices.filter(voice => voice.lang === "zh-CN");
+        console.log("可用的 zh-CN 语音:", zhCNVoices);
+        
+        // 确保有 zh-CN 语音
+        if (zhCNVoices.length === 0) {
+            console.warn("没有找到可用的 zh-CN 语音");
+            SayOutLoud("未找到可用的中文语音");
+            return;
+        }
+    };
     
     try {
         const response = await fetch('https://zklx.xtu.vip.cpolar.top/api-dev/qa/get_text', {
