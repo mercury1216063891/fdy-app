@@ -299,7 +299,7 @@ async function SayOut() {
     // SayOutLoud("三二四");
     const text = await response.text();
     SayOutLoud(text);
-    // SayOutLoud("三二八");
+    SayOutLoud("302");
 
 }
 
