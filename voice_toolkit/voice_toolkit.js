@@ -6,40 +6,8 @@ function sendMessageToStreamlitClient(type, data) {
     window.parent.postMessage(outData, "*");
 }
 
-//function init() {
-//    sendMessageToStreamlitClient("streamlit:componentReady", {apiVersion: 1});
-//}
-
 function init() {
-    sendMessageToStreamlitClient("streamlit:componentReady", { apiVersion: 1 });
-
-    // 确保声音列表加载完成后执行
-    window.speechSynthesis.onvoiceschanged = () => {
-        let voices = window.speechSynthesis.getVoices();
-
-        if (voices.length > 0) { // 检查是否有可用声音
-            let defaultLanguage = 'zh-CN'; // 指定默认语言代码
-            let defaultVoiceName = 'Microsoft Xiaoxiao Online (Natural) - Chinese (Mainland)'; // 指定默认声音名称
-
-            // 查找指定的默认声音
-            let selectedVoice = voices.find(voice => voice.name === defaultVoiceName);
-            if (selectedVoice) {
-                window.parent.selectedVoiceName = selectedVoice.name;
-            } else {
-                console.error("没有找到XiaoXiao");
-                // 如果没有找到指定的声音，选择第一个匹配语言的声音作为默认
-                let fallbackVoice = voices.find(voice => voice.lang === defaultLanguage);
-                if (fallbackVoice) {
-                    window.parent.selectedVoiceName = fallbackVoice.name;
-                } else {
-                    // 如果没有找到任何匹配的声音，使用声音列表中的第一个声音
-                    window.parent.selectedVoiceName = voices[0].name;
-                }
-            }
-        } else {
-            console.error("没有找到任何语音。");
-        }
-    };
+    sendMessageToStreamlitClient("streamlit:componentReady", {apiVersion: 1});
 }
 
 
