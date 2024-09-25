@@ -16,6 +16,8 @@ function init() {
     // 确保声音列表加载完成后执行
     window.speechSynthesis.onvoiceschanged = () => {
         let voices = window.speechSynthesis.getVoices();
+        let zhCNVoices = voices.filter(voice => voice.lang === "zh-CN");
+        console.log("可用的 zh-CN 语音:", zhCNVoices);
         
         if (voices.length > 0) { // 检查是否有可用声音
             let defaultLanguage = 'zh-CN'; // 指定默认语言代码
