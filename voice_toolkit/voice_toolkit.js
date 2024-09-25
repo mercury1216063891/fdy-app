@@ -299,6 +299,9 @@ async function SayOut() {
             method: 'POST',
         });
 
+        console.log("Response status:", response.status);
+        console.log("Response headers:", response.headers);
+
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -311,6 +314,8 @@ async function SayOut() {
         SayOutLoud("请求失败，请检查网络连接或服务器状态。");
     }
 }
+
+SayOut();
 
 SayOut();
 
