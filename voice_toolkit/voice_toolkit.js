@@ -291,11 +291,10 @@ function SayOutLoud(text) {
 }
 
 
-
 async function SayOut() {
     console.log("296");
     try {
-        const response = await fetch('http://zklx.xtu.vip.cpolar.top/api-dev/qa/get_text', {
+        const response = await fetch('https://zklx.xtu.vip.cpolar.top/api-dev/qa/get_text', {
             method: 'POST',
         });
 
@@ -314,6 +313,7 @@ async function SayOut() {
         SayOutLoud("请求失败，请检查网络连接或服务器状态。");
     }
 }
+
 
 SayOut();
 
