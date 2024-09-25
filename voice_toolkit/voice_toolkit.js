@@ -64,7 +64,9 @@ window.speechSynthesis.onvoiceschanged = () => {
     let browserLanguage = navigator.language;
 
     // 参考自 https://chrome.google.com/webstore/detail/voice-control-for-chatgpt/eollffkcakegifhacjnlnegohfdlidhn
-    const languageAll = [["普通话 (中国大陆)", "zh-CN"], ["中文 (中国台灣)", "zh-TW"], ["粵語 (中国香港)", "zh-HK"], ["English (US)", "en-US"], ["English (UK)", "en-GB"], ["English (IN)", "en-IN"], ["Afrikaans", "af-ZA"], ["Bahasa Indonesia", "id-ID"], ["Bahasa Melayu", "ms-MY"], ["Català", "ca-ES"], ["Čeština", "cs-CZ"], ["Dansk", "da-DK"], ["Deutsch", "de-DE"], ["Español (ES)", "es-ES"], ["Français", "fr-FR"], ["Galego", "gl-ES"], ["Hrvatski", "hr_HR"], ["IsiZulu", "zu-ZA"], ["Íslenska", "is-IS"], ["Italiano", "it-IT"], ["Magyar", "hu-HU"], ["Nederlands", "nl-NL"], ["Norsk bokmål", "nb-NO"], ["Polski", "pl-PL"], ["Português (PT)", "pt-PT"], ["Română", "ro-RO"], ["Slovenčina", "sk-SK"], ["Suomi", "fi-FI"], ["Svenska", "sv-SE"], ["Türkçe", "tr-TR"], ["български", "bg-BG"], ["日本語", "ja-JP"], ["한국어", "ko-KR"], ["Pусский", "ru-RU"], ["Српски", "sr-RS"]];
+    //const languageAll = [["普通话 (中国大陆)", "zh-CN"], ["中文 (中国台灣)", "zh-TW"], ["粵語 (中国香港)", "zh-HK"], ["English (US)", "en-US"], ["English (UK)", "en-GB"], ["English (IN)", "en-IN"], ["Afrikaans", "af-ZA"], ["Bahasa Indonesia", "id-ID"], ["Bahasa Melayu", "ms-MY"], ["Català", "ca-ES"], ["Čeština", "cs-CZ"], ["Dansk", "da-DK"], ["Deutsch", "de-DE"], ["Español (ES)", "es-ES"], ["Français", "fr-FR"], ["Galego", "gl-ES"], ["Hrvatski", "hr_HR"], ["IsiZulu", "zu-ZA"], ["Íslenska", "is-IS"], ["Italiano", "it-IT"], ["Magyar", "hu-HU"], ["Nederlands", "nl-NL"], ["Norsk bokmål", "nb-NO"], ["Polski", "pl-PL"], ["Português (PT)", "pt-PT"], ["Română", "ro-RO"], ["Slovenčina", "sk-SK"], ["Suomi", "fi-FI"], ["Svenska", "sv-SE"], ["Türkçe", "tr-TR"], ["български", "bg-BG"], ["日本語", "ja-JP"], ["한국어", "ko-KR"], ["Pусский", "ru-RU"], ["Српски", "sr-RS"]];
+    const languageAll = [["普通话 (中国大陆)", "zh-CN"],["English (US)", "en-US"]];
+    
     let languageArray = [];
 
     languageAll.forEach((n => {
@@ -110,16 +112,23 @@ window.speechSynthesis.onvoiceschanged = () => {
         }
     }
 
-    let localStorageVoice = localStorage.getItem(selectedLanguage + "selectedVoice")
-    for (let option of voiceSelectElement.options) {
-        if (option.value === localStorageVoice) {
+for (let i = 0; i < voices.length; i++) {
+    if (voices[i].lang.includes(selectedLanguage)) {
+        let option = document.createElement("option");
+        option.text = voices[i].name;
+        option.value = voices[i].name;
+
+        // 如果没有选择存储在 localStorage 中，设置默认语音为指定语音
+        if (!localStorageVoice && voices[i].name === "Microsoft Xiaoxiao Online (Natural) - Chinese (Mainland)") {
             option.selected = true;
-            break
-        } else if (!localStorageVoice && option.value.includes("Nature")) {
+        } else if (option.value === localStorage.getItem(selectedLanguage + "selectedVoice")) {
             option.selected = true;
-            break
         }
+
+        voiceSelectElement.add(option);
     }
+}
+
 
 
     if (voiceSelectElement.options.length === 0) {
