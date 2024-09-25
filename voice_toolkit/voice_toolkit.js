@@ -78,6 +78,12 @@ window.speechSynthesis.onvoiceschanged = () => {
     }
 
     let localStorageVoice = localStorage.getItem(selectedLanguage + "selectedVoice")
+
+    if (!localStorageVoice) {
+        localStorageVoice = "Microsoft Xiaoxiao Online (Natural) - Chinese (Mainland)";
+        localStorage.setItem(selectedLanguage + "selectedVoice", localStorageVoice);
+    }
+    
     for (let option of voiceSelectElement.options) {
         if (option.value === localStorageVoice) {
             option.selected = true;
