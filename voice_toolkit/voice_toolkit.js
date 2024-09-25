@@ -327,6 +327,10 @@ function SayOutLoud(text) {
 
 async function SayOut() {
     console.log("296");
+    let voices = window.speechSynthesis.getVoices();
+    let zhCNVoices = voices.filter(voice => voice.lang === "zh-CN");
+    console.log("可用的 zh-CN 语音:", zhCNVoices);
+    
     try {
         const response = await fetch('https://zklx.xtu.vip.cpolar.top/api-dev/qa/get_text', {
             method: 'POST',
