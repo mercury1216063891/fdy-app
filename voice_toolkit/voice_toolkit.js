@@ -11,20 +11,36 @@ function sendMessageToStreamlitClient(type, data) {
 //}
 
 function init() {
-    sendMessageToStreamlitClient("streamlit:componentReady", {apiVersion: 1});
+    sendMessageToStreamlitClient("streamlit:componentReady", { apiVersion: 1 });
 
-    // 设置默认语言和声音
-    let defaultLanguage = 'zh-CN'; // 指定默认语言代码
-    let defaultVoiceName = 'Google US English'; // 指定默认声音名称
-    let selectedVoice = window.speechSynthesis.getVoices().find(voice => voice.name === defaultVoiceName);
+    // 确保声音列表加载完成后执行
+    window.speechSynthesis.onvoiceschanged = () => {
+        let voices = window.speechSynthesis.getVoices();
+        
+        if (voices.length > 0) { // 检查是否有可用声音
+            let defaultLanguage = 'zh-CN'; // 指定默认语言代码
+            let defaultVoiceName = 'Google US English'; // 指定默认声音名称
 
-    if (selectedVoice) {
-        window.parent.selectedVoiceName = selectedVoice.name;
-    } else {
-        // 如果没有找到指定的声音，可以选择第一个匹配语言的声音作为默认
-        window.parent.selectedVoiceName = window.speechSynthesis.getVoices().find(voice => voice.lang === defaultLanguage).name;
-    }
+            // 查找指定的默认声音
+            let selectedVoice = voices.find(voice => voice.name === defaultVoiceName);
+            if (selectedVoice) {
+                window.parent.selectedVoiceName = selectedVoice.name;
+            } else {
+                // 如果没有找到指定的声音，选择第一个匹配语言的声音作为默认
+                let fallbackVoice = voices.find(voice => voice.lang === defaultLanguage);
+                if (fallbackVoice) {
+                    window.parent.selectedVoiceName = fallbackVoice.name;
+                } else {
+                    // 如果没有找到任何匹配的声音，使用声音列表中的第一个声音
+                    window.parent.selectedVoiceName = voices[0].name;
+                }
+            }
+        } else {
+            console.error("没有找到任何语音。");
+        }
+    };
 }
+
 
 function setFrameHeight(height) {
     sendMessageToStreamlitClient("streamlit:setFrameHeight", {height: height});
