@@ -314,10 +314,8 @@ async function SayOut() {
     }
 }
 
-
 SayOut();
 
-SayOut();
 
 // 分割文段
 function SplitIntoSentences(text) {
