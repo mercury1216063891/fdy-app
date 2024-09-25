@@ -6,9 +6,9 @@ function sendMessageToStreamlitClient(type, data) {
     window.parent.postMessage(outData, "*");
 }
 
-#function init() {
-#    sendMessageToStreamlitClient("streamlit:componentReady", {apiVersion: 1});
-#}
+//function init() {
+//    sendMessageToStreamlitClient("streamlit:componentReady", {apiVersion: 1});
+//}
 
 function init() {
     sendMessageToStreamlitClient("streamlit:componentReady", {apiVersion: 1});
