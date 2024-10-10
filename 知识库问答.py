@@ -103,7 +103,7 @@ def base64_to_image(base64_str):
         return None
 
 
-ef send_message():
+def send_message():
     payload = json.dumps({
         "chat_type": st.session_state.chat_type,
         "messages": st.session_state.messages,
