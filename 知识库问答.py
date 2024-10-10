@@ -128,7 +128,7 @@ def send_message():
             # return result
             return {"response_text": f"请求失败，状态码：{response.status_code}"}
         else:
-            return {"response_text": f"请求失败，状态码：{response.status_code}"}
+            return {"response_text": f"(请求失败，状态码：{response.status_code})"}
     except requests.exceptions.Timeout:
         return {"response_text": "请求超时，请稍后再试"}
     except Exception as e:
