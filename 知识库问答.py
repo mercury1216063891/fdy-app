@@ -103,7 +103,7 @@ def base64_to_image(base64_str):
         return None
 
 
-def send_message():
+ef send_message():
     payload = json.dumps({
         "chat_type": st.session_state.chat_type,
         "messages": st.session_state.messages,
@@ -114,7 +114,6 @@ def send_message():
         "n_results": st.session_state.n_results,
         "image_count": st.session_state.image_count,
     })
-    # print(type(payload), payload)
     headers = {'Content-Type': 'application/json'}
 
     url = "http://zklx.xtu.vip.cpolar.top/api-dev/qa/get_answer"
@@ -126,17 +125,16 @@ def send_message():
             result = {"response_text": response_data["response_text"]}
             if "response_image" in response_data:
                 result["response_image"] = response_data["response_image"]
-            return result
+            # return result
+            return {"response_text": f"请求失败，状态码：{response.status_code}"}
         else:
-            print(response.status_code)
-            return f"请求失败，状态码：", response.status_code
+            return {"response_text": f"请求失败，状态码：{response.status_code}"}
     except requests.exceptions.Timeout:
-        print("请求超时，请稍后再试")
-        return "请求超时，请稍后再试", 504
+        return {"response_text": "请求超时，请稍后再试"}
     except Exception as e:
         error_message = f"错误: {e}\n{traceback.format_exc()}"
         print(error_message)
-        return "发生错误，请稍后再试", 500
+        return {"response_text": "发生错误，请稍后再试"}
 
 
 
