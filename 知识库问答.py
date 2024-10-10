@@ -126,7 +126,7 @@ def send_message():
             if "response_image" in response_data:
                 result["response_image"] = response_data["response_image"]
             # return result
-            return {"response_text": f"请求失败，状态码：{response.status_code}"}
+            return "请求失败", 500
         else:
             return {"response_text": f"(请求失败，状态码：{response.status_code})"}
     except requests.exceptions.Timeout:
@@ -155,8 +155,10 @@ if option2 == "键盘":
                     st.image(img)
 
         else:
-            st.session_state.messages.append({"role": "assistant", "message": answer["response_text"]})
-            st.chat_message("assistant").write(answer["response_text"])
+            # st.session_state.messages.append({"role": "assistant", "message": answer["response_text"]})
+            # st.chat_message("assistant").write(answer["response_text"])
+            st.session_state.messages.append({"role": "assistant", "message": answer})
+            st.chat_message("assistant").write(answer)
         print(st.session_state)
 
 elif option2 == "语音":
